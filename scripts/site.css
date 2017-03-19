@@ -1,0 +1,38 @@
+/*
+ syntax = tag to be affected and item:value to change
+ use id attribute to link specific html target to style
+ 
+ # indicates id tag (unique)
+ eg html <p id="intro">Hi</p>
+    css  #intro {font-weight: bold;}
+	 
+ . indicates a class tag (shared and can apply multiple)
+    html <p class="mypara">Hi</p> <p class="mypara">There</p>
+    css  .mypara {color: red;}
+	
+  (see https://www.codeproject.com/Articles/755691/HTML-and-CSS-Part-Page-Layouts)
+  <div> is block element so automatically get space added above and below == grouping
+  <scan> is in-line element so seamless formatting == section of whole
+  
+ note the full size of a object consists of content height & width/ padding / border / margin
+ .flush {width: 240px; border-width: 0; margin: 0; padding: 0; height: 240px; float: left;}
+ float changes from block element to in-line so removes space around it
+*/
+
+body {
+   font-family: 'Verdana';
+}
+table {
+	border-collapse:collapse;
+}
+td {
+	border: 1px solid black;
+	padding: 5px;
+	text-align: left;
+}
+th {
+	border: 1px solid black;
+	padding: 5px;
+	text-align: center;
+	cursor: pointer;
+}

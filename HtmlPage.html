@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<!-- C:\Users\Abi\Documents\Visual Studio 2013\WebSites\WebSite1\Scripts
+
+    ng == angular directives to markup dom elements with smarts
+    10x10 = {{ 10 * 10}} == expressions
+    MVC model:Controller:view pattern controllers = js objects created by angular
+    Filters == way of formatting output using | pipes uppercase; lowercase; currency:"gbp"; number:3;
+    ng-include == replace div with html file - see trick with local host (			https://www.youtube.com/watch?v=J0n1DGUkhPI&list=PLYxzS__5yYQmX2bItSRCqwiQZn5dIL1gt#t=248.572032
+
+    routes
+    need module declaration == main() pass in name and dependencies
+    controller == js fun() called by angular framework
+    html == view
+    $scope object provided by framework within view
+    controller only responsible for its div and divs children scope (can do body and all children)
+    controller does not modify dom directly to keep clean mvc seperation (ng-markup does that)
+    controller should only add data and behaviour to scope object
+    {{}} == databinding expressions
+    use uncompressed angular.js rather than angular.min.js for full error messages in console (else follow error url)
+    note img binding run twice - once for framework (can return 404) and once for browser
+    see: https://www.youtube.com/watch?v=YY_-BB_lZDI&list=PL6n9fhu94yhWKHkcL7RJmmXyxkuFB3KSl&index=4
+    need ng-src directive to allow the framework to bind the path before the browser attempts the load
+    2 way data binding shown by same value in text box (ng-model directive for input, select & textarea) and display
+	format output by piping to filter with parameters eg dob | date:"dd/mm/yy"
+	see https://www.youtube.com/watch?v=hnKSv28dp_w&index=10&list=PL6n9fhu94yhWKHkcL7RJmmXyxkuFB3KSl
+	  for column click sorting
+	ng-init sets scope vars
+	ng-include embed html in page (header/footers) alternate layouts
+-->
+<html lang="en-US" ng-app="myModule">
+<head>
+    <link rel="stylesheet" type="text/css" href="scripts/site.css" />
+    <script src="scripts/angular.js"></script>
+    <script src="scripts/Script.js"></script>
+</head>
+<body>
+    <div ng-controller="myController">
+        <input type="text" ng-model="emp.firstname" /> <br />
+        {{emp.firstname}} <br>
+        {{emp.lastname}} <br>
+        {{emp.gender}} <br />
+        Add myItem to model: <input type="text" ng-model="myItem" /> <br />
+        {{myItem}} <br />
+		Rows : <input type="number" step="1" min="0" max="5" ng-model="RowLimit" />
+		Order : <select ng-model="sortCol">
+		           <option value="lastname">Last Name asc</option>
+				   <option value="-lastname">Last Name desc</option>
+				   <option value="salary">Salary asc</option>
+				   <option value="-salary">Salary desc</option>
+				</select>
+        <table>
+			<tr>
+				<th>n</th>
+				<th>fname</th>
+				<th>surname</th>
+				<th>dob</th>
+				<th>salary</th>
+				<th>up</th>
+				<th>down</th>
+			</tr>
+            <tr ng-repeat="e in empList | orderBy:sortCol | limitTo:RowLimit">
+				<td>{{ $index }}</td>
+                <td>{{e.firstname}}</td>
+                <td>{{e.lastname}}</td>
+				<td>{{e.dob | date:"d MMM yyyy"}}</td>
+                <td>{{e.salary | currency:"$":2}}</td>
+				<td>{{e.tot}}</td>
+				<td> <input type = "button" value = "Sub" ng-click="SubOne(e)"></td>
+                <td> <input type = "button" value = "Add" ng-click="AddOne(e)"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

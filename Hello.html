@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- 
+	ng == angular directives to markup dom elements with smarts
+	10x10 = {{ 10 * 10}} == expressions
+	MVC model:Controller:view pattern controllers = js objects created by angular
+	Filters == way of formatting output using | pipes uppercase; lowercase; currency:"gbp"; number:3;
+	ng-include == replace div with html file - see trick with local host (			https://www.youtube.com/watch?v=J0n1DGUkhPI&list=PLYxzS__5yYQmX2bItSRCqwiQZn5dIL1gt#t=248.572032
+	
+	routes
+	need module declaration == main() pass in name and dependencies
+-->
+
+ 
+<html lang="en-US" ng-app="myTestApp">
+
+<script src="scripts/angular.min.js"></script>
+<body>
+
+	<p>Name : <input type="text" ng-model="name"></p>
+
+	<div ng-init = "Test='Fred'">
+	  <h1>Hello {{name}}</h1>
+	  <h1>Hello {{name}} {{Test}}</h1>
+	  <div data-ng-bind="name"></div>
+	</div>
+
+	<div ng-init = "languages=[{name:'Javascript', ext:'.js'}, {name:'Python', ext:'.py'}]">
+		<p ng-repeat = "lang in languages">
+		Lang Name : {{ lang.name }} <br>
+		Land Ext : {{ lang.ext | uppercase }} <br>
+		</p>
+	</div>
+
+	<script>
+	  var myObj = {};
+	  console.log (typeof myObj); // object
+	</script>
+
+	<div ng-controller='langController'>
+		select your fav language: <button ng-click="js()">js</button><button ng-click="python()">python</button>
+		
+		<p>You have selected: {{myFavLang }} </p>
+	</div>
+
+	<script>
+		// see https://www.youtube.com/watch?v=PPhxbtddLXg&list=PLYxzS__5yYQmX2bItSRCqwiQZn5dIL1gt#t=866.593895
+		var app = angular.module('myTestApp', []); // name of app and array for dependencies
+		app.controller('langController', function($scope){ // bind logic instead of ng-init and controller event handler logic
+			$scope.myFavLang = 'None';
+			$scope.js = function () {$scope.myFavLang = 'javascript'};
+			$scope.python = function () {$scope.myFavLang = 'python'};
+		}); // anonymouse function sent as angular var
+		console.log (typeof app); // object
+	</script>
+	
+	
+	
+	
+</body>
+</html>

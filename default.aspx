@@ -1,0 +1,1 @@
+<% Response.Redirect("HtmlPage.html", true) %>
